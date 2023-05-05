@@ -1,0 +1,81 @@
+<div class="card-top container-fluid">
+    <form [formGroup]="searchForm" (ngSubmit)="searchProduct() ">
+        <div class="container search-bar">
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <input class="form-control my-0 py-1 amber-border" type="text" formControlName="filter" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button id="searchButton" type=" submit ">
+                        <span class="input-group-text amber lighten-3 " id="basic-text1 "><i class="fas fa-search text-grey "
+                            aria-hidden="true "></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="filterProducts brandfilters ">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Filter by brand</mat-label>
+            <mat-select (selectionChange)="handleselect($event) " id="brands">
+
+                <mat-option value="all">All brands</mat-option>
+                <mat-option *ngFor="let brand of uniqueBrands " [value]="brand">
+                    {{brand}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-radio-group aria-label="Select an option ">
+
+            <mat-label>
+                <strong>
+                    Select price range
+                </strong>
+            </mat-label>
+
+            <mat-radio-button (change)="handleRadio($event) " value="showall">Show all</mat-radio-button>
+            <mat-radio-button (change)="handleRadio($event) " value="-2000">Less than 2000</mat-radio-button>
+            <mat-radio-button (change)="handleRadio($event) " value="2000-5000">2000 - 5000</mat-radio-button>
+            <mat-radio-button (change)="handleRadio($event) " value="5000+">5000+</mat-radio-button>
+        </mat-radio-group>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="content ">
+        <div *ngIf="found==true" fxLayout="row wrap" [@listAnimation]="productList.length" (@listAnimation.start)="logAnimation($event) " (@listAnimation.done)="logAnimation($event) ">
+            <div class="productGrid " fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of productList ">
+                <mat-card class="mat-elevation-z4">
+
+                    <img mat-card-image style="height: 350px; object-fit: cover; " src="{{item.image}} " routerLink="/description/{{item.productCode}} ">
+                    <mat-card-content>
+                        <div class="row ">
+                            <p *ngIf="isLoggedIn ">
+                                <strong>Brand:</strong> {{item.brand}}
+                            </p>
+                        </div>
+                        <div class="row ">
+                            <p><strong>Name:</strong> {{item.name}}</p>
+                        </div>
+                        <div class="row ">
+                            <p *ngIf="isLoggedIn=='true' "><strong>Price:</strong> ₹{{item.price}}</p>
+                        </div>
+                        <!-- <button style="color: primary ">Primary</button> -->
+                        <button class="btn btn-outline-warning" color="primary" style="width: -webkit-fill-available;" routerLink="/description/{{item.productCode}}">View Description</button>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+        </div>
+        <div *ngIf="found==false">
+            <img class="notFound" src="https://www.sudeepintl.com/assets/website/image/oops.png" alt="Product not found!!">
+
+        </div>
+    </div>

@@ -1,0 +1,13 @@
+footer {
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  padding: 7px;
+  min-height: 30px;
+  width: 100%;
+  bottom: 0px;
+  position: fixed;
+  background-color: #14854e;
+  color: white;
+}
+/*# sourceMappingURL=app.component.css.map */

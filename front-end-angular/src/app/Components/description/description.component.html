@@ -1,0 +1,53 @@
+<div class="container container-fluid">
+    <div class="row" style="margin-top: 30px;">
+        <div class="left col-6">
+            <img src="{{data.image}}" alt=""></div>
+        <div class="right col-6 ">
+            <div class="container text-center">
+                <h1>{{data.name}}</h1>
+                <h2><strong>{{data.brand}}</strong></h2>
+                <hr>
+            </div>
+
+            <h3>
+                <Strong>₹ {{data.price}}</Strong>
+                <h4>
+                    <p style="color: grey">incl. of taxes and duties
+                    </p>
+                </h4>
+
+            </h3>
+            <h3>
+                <form [formGroup]="pincodeForm" (ngSubmit)="checkDeliverable() ">
+                    <mat-card>
+                        <p>
+                            <strong><h3>Deliverable ?</h3> </strong>
+                        </p>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Enter Pincode</mat-label>
+                            <input class="form-control" formControlName="pincode" matInput placeholder="Pincode" value="">
+                        </mat-form-field>
+                        &nbsp;
+                        <button type="submit">
+                        <mat-icon class=" ">flight_takeoff</mat-icon>
+                        </button>
+
+                        <div *ngIf="flagPin">
+                            <p *ngIf="delivery==true, else elseBlock" style="color:green;">You will receive it in {{days}} days!
+                            </p>
+                            <ng-template #elseBlock>
+                                <p style="color: red;">
+                                    Sorry!! The product is not deliverable at your Location.
+                                </p>
+                            </ng-template>
+                        </div>
+
+
+                    </mat-card>
+                </form>
+
+            </h3>
+            <h3>{{data.description}}</h3>
+        </div>
+    </div>
+</div>
