@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  url="http://localhost:8081/user";
-  login_url="http://localhost:8081/login";
-  product_url="http://localhost:8081/allProducts";
-  productDetail_url = "http://localhost:8081/productDetails";
-  searchProduct_url = "http://localhost:8081/searchProduct";
-  deliverableProduct_url = "http://localhost:8081/productDetails";
+  url="http://catalogue.eu-north-1.elasticbeanstalk.com/user";
+  login_url="http://catalogue.eu-north-1.elasticbeanstalk.com/login";
+  product_url="http://catalogue.eu-north-1.elasticbeanstalk.com/allProducts";
+  productDetail_url = "http://catalogue.eu-north-1.elasticbeanstalk.com/productDetails";
+  searchProduct_url = "http://catalogue.eu-north-1.elasticbeanstalk.com/searchProduct";
+  deliverableProduct_url = "http://catalogue.eu-north-1.elasticbeanstalk.com/productDetails";
 
   constructor(private http:HttpClient) { }
 
@@ -39,7 +39,7 @@ export class ApiService {
   productDetails(data: any) : Observable<any> {
     console.log(data, "datat indise serviec");
     let ids = data;
-    console.log(`http://localhost:8081/productDetails/${ids}`);
+    console.log(`http://catalogue.eu-north-1.elasticbeanstalk.com/productDetails/${ids}`);
     return this.http.get(`${this.productDetail_url}/${data.productCode}`);
   }
 
